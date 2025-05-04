@@ -1,0 +1,53 @@
+.logo-animate {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.logo-animate span {
+  transform-origin: left center;
+  transform: rotateZ(90deg);
+  position: relative;
+  left: -30px;
+  transition: all 0.3s;
+  opacity: 0;
+  font-size: 0px;
+}
+
+.logo-animate img {
+  z-index: 9;
+}
+
+.logo-animate:hover span {
+  transform: rotateZ(0deg);
+  left: 0;
+  font-size: inherit;
+  opacity: 1;
+}
+
+.navoption-container li {
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  top: 0px;
+}
+
+.navoption-container li:hover {
+  top: 2px;
+}
+
+input.search-form-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px 5px;
+  border-bottom: 1px solid;
+  color: #636363;
+  width: 100%;
+  transition: all 0.3s;
+}
+
+input.search-form-input:focus {
+  color: white;
+}
