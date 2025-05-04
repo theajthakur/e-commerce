@@ -5,8 +5,8 @@ export default function Carousel() {
     <div className="carousel-container">
       <div className="container">
         <div className="row align-items-center py-sm-0 pt-5">
-          <div className="col-sm-8 ">
-            <div className="text-center">
+          <div className="col-sm-8">
+            <div className="text-center animate__animated animate__slideInLeft">
               <div className="sale-banner-text">
                 <p>India's Biggest</p>
                 <p className="sale-text text-bold">SALE</p>
@@ -15,7 +15,11 @@ export default function Carousel() {
             </div>
           </div>
           <div className="col-sm-4 carousel-image-model">
-            <img src="/assets/images/male_model_1.jpg" width="100%" />
+            <img
+              className="animate__animated animate__slideInRight"
+              src="/assets/images/male_model_1.jpg"
+              width="100%"
+            />
           </div>
         </div>
       </div>
