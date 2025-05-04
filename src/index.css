@@ -1,7 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Knewave&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 :root {
   --bs-primary: #4f46e5;
 }
 
 body {
   overflow-x: hidden;
+  user-select: none;
+}
+
+.knewave {
+  font-family: "Knewave", cursive;
+}
+
+.poppins {
+  font-family: "Poppins", cursive;
 }

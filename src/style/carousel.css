@@ -1,0 +1,42 @@
+.carousel-container {
+  background: antiquewhite;
+}
+
+.sale-banner-text p {
+  font-size: 4rem;
+  font-family: "Poppins", sans-serif;
+  color: #000;
+  font-weight: 900;
+}
+
+.sale-banner-text p.sale-text {
+  -webkit-text-stroke: 2px white;
+  color: transparent;
+  position: relative;
+  transition: all 0.2s;
+  font-size: 6rem;
+  letter-spacing: 10px;
+}
+
+.sale-banner-text p.sale-text:hover {
+  left: -2px;
+  -webkit-text-stroke: 2px rgb(255, 255, 255);
+}
+
+.sale-banner-text p.sale-text:before {
+  position: absolute;
+  content: "SALE";
+  left: calc(50% + 10px);
+  translate: -50%;
+  color: #aa0000;
+  transition: all 0.2s;
+  -webkit-text-stroke: 0px #fff;
+}
+
+.sale-banner-text p.sale-text:hover:before {
+  left: calc(50% + 0px);
+}
+
+.carousel-image-model img {
+  mix-blend-mode: multiply;
+}
