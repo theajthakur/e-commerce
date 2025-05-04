@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Logo from "../assets/Logo.svg";
 import Cart from "../assets/Cart";
 import "../style/Navbar.css";
 import { CrossIcon, Search, X } from "lucide-react";
@@ -60,7 +59,7 @@ function Navbar({ cart }) {
       <div className="container">
         <a className="navbar-brand" href="#">
           <div className="logo-animate">
-            <img src={Logo} />
+            <img src="/assets/images/logo.svg" />
             <span>Treshop</span>
           </div>
         </a>
