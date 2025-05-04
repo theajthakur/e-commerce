@@ -8,6 +8,7 @@
 body {
   overflow-x: hidden;
   user-select: none;
+  font-family: "Poppins", cursive;
 }
 
 .knewave {

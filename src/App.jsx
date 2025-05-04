@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Carousel from "./components/Carousel";
+import "animate.css";
 
 export default function App() {
   const [cart, setCart] = useState([]);

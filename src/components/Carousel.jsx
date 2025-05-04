@@ -4,12 +4,13 @@ export default function Carousel() {
   return (
     <div className="carousel-container">
       <div className="container">
-        <div className="row align-items-center py-sm-0 py-5">
+        <div className="row align-items-center py-sm-0 pt-5">
           <div className="col-sm-8 ">
             <div className="text-center">
               <div className="sale-banner-text">
                 <p>India's Biggest</p>
                 <p className="sale-text text-bold">SALE</p>
+                <p className="description-text">Upto 90% Discount</p>
               </div>
             </div>
           </div>
