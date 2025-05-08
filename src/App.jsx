@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Carousel from "./components/Carousel";
 import "animate.css";
+import Products from "./components/Products";
 
 export default function App() {
   const [cart, setCart] = useState([]);
@@ -21,6 +22,7 @@ export default function App() {
     <div>
       <Navbar cart={cart} />
       <Carousel />
+      <Products />
     </div>
   );
 }
