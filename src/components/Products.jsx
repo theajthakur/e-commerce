@@ -1,7 +1,8 @@
 import { Star } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../style/products.css";
-export default function Products({ type = "home", search = "" }) {
+import { useParams } from "react-router";
+export default function Products() {
   const products = [
     {
       name: "AirMax Runner",
@@ -56,15 +57,6 @@ export default function Products({ type = "home", search = "" }) {
       thumbnail: "perfume_2.jpg",
       originalPrice: 1899,
       offeredPrice: 399,
-    },
-    {
-      name: "Ocean Breeze",
-      description: "Fresh aquatic scent with a citrusy note.",
-      rating: 4.1,
-      category: "perfume",
-      thumbnail: "perfume_3.jpg",
-      originalPrice: 2999,
-      offeredPrice: 599,
     },
     {
       name: "Mystic Oud",
@@ -148,31 +140,50 @@ export default function Products({ type = "home", search = "" }) {
       offeredPrice: 1649,
     },
   ];
+  const { product } = useParams();
   const [selectedProducts, setSelectedProducts] = useState(products);
+  useEffect(() => {
+    if (product) {
+      setSelectedProducts((prev) =>
+        prev.filter(
+          (sp) => sp.name.match(product) || sp.description.match(product)
+        )
+      );
+    }
+  }, []);
   return (
     <div className="product-container">
       <div className="product-inner container">
         <div className="row">
-          {selectedProducts.map((product) => (
-            <div className="product-unit col-11 col-sm-6 col-lg-4 my-5">
-              <div className="p-2 product-thumbnail">
-                <img
-                  className="thumbnail"
-                  src={`/assets/images/products/${product.thumbnail}`}
-                />
-                <div className="product-rating">
-                  <div className="star-icon">
-                    <Star size={15} />
-                    <span className="rating-value">{product.rating}</span>
+          {selectedProducts.map((product, index) => (
+            <div
+              className="product-unit col-11 col-sm-6 col-lg-4 my-5"
+              key={index}
+            >
+              <div className="product-unit-inner">
+                <div className="p-2 product-thumbnail">
+                  <img
+                    className="thumbnail"
+                    src={`/assets/images/products/${product.thumbnail}`}
+                  />
+                  <div className="product-rating">
+                    <div className="star-icon">
+                      <Star size={15} />
+                      <span className="rating-value">{product.rating}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="product-detail">
-                <div className="title">{product.name}</div>
-                <div className="description">{product.description}</div>
-                <div className="product-pricing">
-                  <div className="offered-price"> {product.offeredPrice}</div>
-                  <div className="original-price">{product.originalPrice}</div>
+                <div className="product-detail">
+                  <div className="title">{product.name}</div>
+                  <div className="description">{product.description}</div>
+                  <div className="product-pricing">
+                    <div className="offered-price">
+                      ₹ {product.offeredPrice}
+                    </div>
+                    <div className="original-price">
+                      ₹{product.originalPrice}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

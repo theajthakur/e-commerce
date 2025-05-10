@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,6 +9,7 @@ import Products from "./components/Products";
 
 export default function App() {
   const [cart, setCart] = useState([]);
+
   useEffect(() => {
     try {
       const cartItems = localStorage.getItem("treshop_cart") || "[]";
@@ -18,11 +20,20 @@ export default function App() {
     }
   }, []);
 
-  return (
-    <div>
-      <Navbar cart={cart} />
+  const HomePage = () => (
+    <>
       <Carousel />
       <Products />
-    </div>
+    </>
+  );
+
+  return (
+    <Router>
+      <Navbar cart={cart} />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/search/:product" element={<Products />} />
+      </Routes>
+    </Router>
   );
 }

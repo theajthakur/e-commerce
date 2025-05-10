@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import Cart from "../assets/Cart";
 import "../style/Navbar.css";
 import { CrossIcon, Search, X } from "lucide-react";
+import { useNavigate } from "react-router";
 
 function Navbar({ cart }) {
   const [searchVisibility, setSearchVisibility] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
   const productNames = [
     "Leather Jacket",
     "Denim Jeans",
@@ -28,7 +31,20 @@ function Navbar({ cart }) {
   const navOptions = [
     {
       component: searchVisibility ? (
-        <input className="search-form-input" placeholder={placeholder} />
+        <input
+          className="search-form-input"
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
+          placeholder={placeholder}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              if (!searchTerm) return;
+              navigate(`/search/${searchTerm}`);
+            }
+          }}
+        />
       ) : (
         ""
       ),
@@ -57,7 +73,7 @@ function Navbar({ cart }) {
   return (
     <nav className="navbar navbar-expand navbar-dark bg-dark">
       <div className="container">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/">
           <div className="logo-animate">
             <img src="/assets/images/logo.svg" />
             <span>Treshop</span>
