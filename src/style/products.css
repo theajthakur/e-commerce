@@ -91,3 +91,8 @@
 .product-unit .product-detail .title:hover {
   color: #00b6ff;
 }
+
+a {
+  text-decoration: none;
+  color: initial;
+}

@@ -6,6 +6,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import Carousel from "./components/Carousel";
 import "animate.css";
 import Products from "./components/Products";
+import ProductPage from "./components/ProductPage";
 
 export default function App() {
   const [cart, setCart] = useState([]);
@@ -33,6 +34,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/search/:product" element={<Products />} />
+        <Route path="/product/:productId" element={<ProductPage />} />
       </Routes>
     </Router>
   );
