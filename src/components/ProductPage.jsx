@@ -3,13 +3,17 @@ import "../style/ProductPage.css";
 import products from "../assets/Products.json";
 import { useParams } from "react-router";
 import { CheckCheck, ShoppingBag, ShoppingCart, Star } from "lucide-react";
-export default function ProductPage({ setCart, cart }) {
+import { loadRazorpay } from "../utils/Razorpay";
+export default function ProductPage({ setCart, cart, setIsLoading }) {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   useEffect(() => {
     const prod = products.find((p) => p.uniqueID == productId);
     setProduct(prod);
   }, [productId]);
+  const handleQuickPurchase = () => {
+    loadRazorpay(product.offeredPrice, setIsLoading);
+  };
   return (
     <div className="product-showcase-container container">
       <div className="main-show">
@@ -47,7 +51,7 @@ export default function ProductPage({ setCart, cart }) {
                   </div>
                   <div className="shop-btn-container">
                     <div className="inner-btn buy-btn">
-                      <button>
+                      <button onClick={handleQuickPurchase}>
                         <ShoppingBag /> <span>Buy Now</span>
                       </button>
                     </div>

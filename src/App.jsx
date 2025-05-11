@@ -55,7 +55,13 @@ export default function App() {
             <Route path="/search/:product" element={<Products />} />
             <Route
               path="/product/:productId"
-              element={<ProductPage cart={cart} setCart={setCart} />}
+              element={
+                <ProductPage
+                  cart={cart}
+                  setCart={setCart}
+                  setIsLoading={setIsLoading}
+                />
+              }
             />
           </Routes>
         </div>
