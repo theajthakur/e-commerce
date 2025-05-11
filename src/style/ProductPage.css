@@ -64,3 +64,12 @@ p.discount-container span {
 .product-showcase-container {
   padding: 30px 0;
 }
+
+.thumbnail-container img {
+  height: auto;
+  max-width: 100%;
+}
+
+.thumbnail-container {
+  text-align: center;
+}
