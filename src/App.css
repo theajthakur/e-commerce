@@ -1,3 +1,16 @@
+.body-controller {
+  position: relative;
+}
+
+.body-controller .cart-container.visible {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: white;
+  height: 100%;
+  z-index: 9;
+}
+
 @media screen and (min-width: 992px) {
   .body-controller {
     display: flex;
@@ -17,7 +30,6 @@
 
   .body-controller .cart-container {
     width: 0%;
-    background: #ddfcff;
     transition: all 0.3s;
     overflow: hidden;
   }
@@ -25,6 +37,7 @@
   .body-controller .cart-container.visible {
     width: 30%;
     box-shadow: -2px 0 10px 0 #00000010;
+    position: unset;
   }
 }
 

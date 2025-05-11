@@ -2,6 +2,11 @@ import { LucideShoppingCart, X } from "lucide-react";
 import React from "react";
 
 export default function Cart({ cart, setCart }) {
+  const bill = { offeredPrice: 0, originalPrice: 0 };
+  cart.forEach((c) => {
+    bill.offeredPrice += c.offeredPrice;
+    bill.originalPrice += c.originalPrice;
+  });
   return (
     <div className="cart-items-container h-100">
       <div className="container h-100">
@@ -23,6 +28,7 @@ export default function Cart({ cart, setCart }) {
                     <p className="small m-0">
                       <span className="small">{c.description}</span>
                     </p>
+                    <p>{c.offeredPrice}</p>
                   </div>
                   <div className="action-product">
                     <button
@@ -38,6 +44,32 @@ export default function Cart({ cart, setCart }) {
                 </div>
               </div>
             ))}
+            <div className="bill-calculator">
+              <table className="table table-borderless">
+                <tbody>
+                  <tr>
+                    <td>Original Price: </td>
+                    <td>{bill?.originalPrice?.toFixed(2) || 0.0}</td>
+                  </tr>
+                  <tr>
+                    <td>Discount: </td>
+                    <td>
+                      {(bill?.originalPrice - bill?.offeredPrice)?.toFixed(2) ||
+                        0.0}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Offered Price: </td>
+                    <td>
+                      <b>{bill?.offeredPrice?.toFixed(2) || 0.0}</b>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <button className="w-100 btn btn-lg btn-warning">
+                Purchase Now
+              </button>
+            </div>
           </div>
         ) : (
           <div className="d-flex h-100 justify-content-center align-items-center">
