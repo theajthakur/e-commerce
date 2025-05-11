@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
+import "../style/ProductPage.css";
 import products from "../assets/Products.json";
 import { useParams } from "react-router";
 import { ShoppingBag, ShoppingCart, Star } from "lucide-react";
-export default function ProductPage() {
+export default function ProductPage({ setCart }) {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   useEffect(() => {
     const prod = products.find((p) => p.uniqueID == productId);
     setProduct(prod);
-    console.log(prod);
   }, [productId]);
   return (
     <div className="product-showcase-container container">
@@ -33,14 +33,35 @@ export default function ProductPage() {
                     {product.rating} out of 78 ratings
                   </span>
                 </p>
-                <h3 className="fw-bold">₹ {product.offeredPrice}</h3>
-                <div className="button0hub mt-3">
-                  <button className="btn btn-success">
-                    <ShoppingBag /> BUY NOW
-                  </button>
-                  <button className="btn btn-info ms-2">
-                    <ShoppingCart /> Add to Cart
-                  </button>
+                <p className="discount-container">
+                  <span className="p-2 bg-white">
+                    {parseInt(
+                      (1 - product.offeredPrice / product.originalPrice) * 100
+                    )}
+                    % Discount
+                  </span>
+                </p>
+                <div className="price-container d-flex w-100 gap-3">
+                  <h3 className="fw-bold">₹ {product.offeredPrice}</h3>
+                  <h5 className="text-muted">
+                    <s>₹ {product.originalPrice}</s>
+                  </h5>
+                </div>
+                <div className="shop-btn-container">
+                  <div className="inner-btn buy-btn">
+                    <button>
+                      <ShoppingBag /> <span>Buy Now</span>
+                    </button>
+                  </div>
+                  <div className="inner-btn cart-btn">
+                    <button
+                      onClick={() => {
+                        setCart((prev) => [...prev, product]);
+                      }}
+                    >
+                      <ShoppingCart /> <span>Add to Cart</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

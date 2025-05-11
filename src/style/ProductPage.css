@@ -1,0 +1,62 @@
+p.discount-container {
+  display: flex;
+  width: fit-content;
+  position: relative;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+}
+
+p.discount-container:hover {
+  padding: 5px;
+}
+
+p.discount-container:before {
+  animation: 2s rotate linear infinite;
+  content: "";
+  width: 20px;
+  position: absolute;
+  background: linear-gradient(45deg, #2bff00, #0011ff);
+  height: 200px;
+}
+
+p.discount-container span {
+  z-index: 9;
+}
+
+@keyframes rotate {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+
+.shop-btn-container {
+  display: inline-flex;
+  width: 100%;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.shop-btn-container .inner-btn {
+  width: 100%;
+  padding: 5px;
+}
+
+.shop-btn-container .inner-btn button {
+  width: 100%;
+  outline: none;
+  border: 1px solid yellow;
+  padding: 10px;
+  background: #ffa700;
+  transition: all 0.2s;
+  box-shadow: 0 0 0 0 #0000002b;
+}
+
+.shop-btn-container .inner-btn button:hover {
+  box-shadow: 3px 3px 10px 0 #0000002b;
+  background: #f80;
+}

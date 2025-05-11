@@ -21,6 +21,11 @@ export default function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (cart.length == 0) return;
+    localStorage.setItem("treshop_cart", JSON.stringify(cart));
+  }, [cart]);
+
   const HomePage = () => (
     <>
       <Carousel />
@@ -34,7 +39,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/search/:product" element={<Products />} />
-        <Route path="/product/:productId" element={<ProductPage />} />
+        <Route
+          path="/product/:productId"
+          element={<ProductPage setCart={setCart} />}
+        />
       </Routes>
     </Router>
   );
