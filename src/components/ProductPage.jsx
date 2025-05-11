@@ -11,7 +11,7 @@ export default function ProductPage() {
     console.log(prod);
   }, [productId]);
   return (
-    <div className="product-showcase-container">
+    <div className="product-showcase-container container">
       <div className="main-show mt-5">
         {product ? (
           <div className="row">
