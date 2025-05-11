@@ -9,6 +9,7 @@ import "animate.css";
 import Products from "./components/Products";
 import ProductPage from "./components/ProductPage";
 import Cart from "./components/Cart";
+import Footer from "./components/utils/Footer";
 
 export default function App() {
   const [showCart, setShowCart] = useState(false);
@@ -59,6 +60,7 @@ export default function App() {
           {showCart ? <Cart cart={cart} setCart={setCart} /> : ""}
         </div>
       </div>
+      <Footer />
     </Router>
   );
 }

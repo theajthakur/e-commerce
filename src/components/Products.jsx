@@ -25,7 +25,7 @@ export default function Products() {
   return (
     <div className="product-container">
       <div className="product-inner container">
-        <div className="row">
+        <div className="row justify-content-center">
           {selectedProducts.map((product, index) => (
             <div
               className="product-unit col-11 col-sm-6 col-lg-4 my-5"

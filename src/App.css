@@ -1,11 +1,14 @@
 @media screen and (min-width: 992px) {
   .body-controller {
     display: flex;
+    height: 100vh;
+    overflow: hidden;
   }
 
   .body-controller .main-body-container {
     width: 100%;
     transition: 0.3s;
+    overflow-y: scroll;
   }
 
   .body-controller .main-body-container.shrinked {
@@ -21,5 +24,15 @@
 
   .body-controller .cart-container.visible {
     width: 30%;
+    box-shadow: -2px 0 10px 0 #00000010;
   }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.row {
+  margin: 0;
+  padding: 0;
 }

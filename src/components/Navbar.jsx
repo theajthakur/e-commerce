@@ -32,6 +32,7 @@ function Navbar({ cart, setShowCart }) {
     {
       component: searchVisibility ? (
         <input
+          autoFocus={true}
           className="search-form-input"
           value={searchTerm}
           onChange={(e) => {
