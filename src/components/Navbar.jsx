@@ -4,7 +4,7 @@ import "../style/Navbar.css";
 import { CrossIcon, Search, X } from "lucide-react";
 import { useNavigate } from "react-router";
 
-function Navbar({ cart }) {
+function Navbar({ cart, setShowCart }) {
   const [searchVisibility, setSearchVisibility] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -68,7 +68,10 @@ function Navbar({ cart }) {
       ),
       title: "Search Products",
     },
-    { component: <Cart cartLength={cart.length} />, title: "Cart Items" },
+    {
+      component: <Cart cartLength={cart.length} setShowCart={setShowCart} />,
+      title: "Cart Items",
+    },
   ];
   return (
     <nav className="navbar navbar-expand navbar-dark bg-dark">

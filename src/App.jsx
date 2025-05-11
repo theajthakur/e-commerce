@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import "./App.css";
 import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -7,8 +8,10 @@ import Carousel from "./components/Carousel";
 import "animate.css";
 import Products from "./components/Products";
 import ProductPage from "./components/ProductPage";
+import Cart from "./components/Cart";
 
 export default function App() {
+  const [showCart, setShowCart] = useState(false);
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -21,8 +24,13 @@ export default function App() {
     }
   }, []);
 
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
-    if (cart.length == 0) return;
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     localStorage.setItem("treshop_cart", JSON.stringify(cart));
   }, [cart]);
 
@@ -35,15 +43,22 @@ export default function App() {
 
   return (
     <Router>
-      <Navbar cart={cart} />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/search/:product" element={<Products />} />
-        <Route
-          path="/product/:productId"
-          element={<ProductPage setCart={setCart} />}
-        />
-      </Routes>
+      <Navbar cart={cart} setShowCart={setShowCart} />
+      <div className="body-controller">
+        <div className={`main-body-container ${showCart ? "shrinked" : ""}`}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/search/:product" element={<Products />} />
+            <Route
+              path="/product/:productId"
+              element={<ProductPage setCart={setCart} />}
+            />
+          </Routes>
+        </div>
+        <div className={`cart-container ${showCart ? "visible" : ""}`}>
+          {showCart ? <Cart cart={cart} setCart={setCart} /> : ""}
+        </div>
+      </div>
     </Router>
   );
 }

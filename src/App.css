@@ -1,0 +1,25 @@
+@media screen and (min-width: 992px) {
+  .body-controller {
+    display: flex;
+  }
+
+  .body-controller .main-body-container {
+    width: 100%;
+    transition: 0.3s;
+  }
+
+  .body-controller .main-body-container.shrinked {
+    width: 70%;
+  }
+
+  .body-controller .cart-container {
+    width: 0%;
+    background: #ddfcff;
+    transition: all 0.3s;
+    overflow: hidden;
+  }
+
+  .body-controller .cart-container.visible {
+    width: 30%;
+  }
+}

@@ -60,3 +60,7 @@ p.discount-container span {
   box-shadow: 3px 3px 10px 0 #0000002b;
   background: #f80;
 }
+
+.product-showcase-container {
+  padding: 30px 0;
+}

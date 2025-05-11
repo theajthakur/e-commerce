@@ -12,18 +12,18 @@ export default function ProductPage({ setCart }) {
   }, [productId]);
   return (
     <div className="product-showcase-container container">
-      <div className="main-show mt-5">
+      <div className="main-show">
         {product ? (
           <div className="row">
-            <div className="col-sm-4">
-              <div className="thumbnail-container">
+            <div className="col-lg-4">
+              <div className="thumbnail-container p-5 p-lg-0">
                 <img
                   src={`/assets/images/products/${product.thumbnail}`}
                   width={"100%"}
                 />
               </div>
             </div>
-            <div className="col-sm-6">
+            <div className="col-lg-8">
               <div className="product-meta">
                 <h1>{product.name}</h1>
                 <p>{product.description}</p>
