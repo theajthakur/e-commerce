@@ -1,7 +1,7 @@
 import { LucideShoppingCart, X } from "lucide-react";
 import React from "react";
 
-export default function Cart({ cart, setCart }) {
+export default function Cart({ cart, setCart, setIsLoading }) {
   const loadScript = (src) => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -18,12 +18,14 @@ export default function Cart({ cart, setCart }) {
     bill.originalPrice += c.originalPrice;
   });
   const loadRazorpay = async (amount) => {
+    setIsLoading(true);
     const resh = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
 
     if (!resh) {
       alert("Failed to load Razorpay SDK. Are you online?");
+      setIsLoading(false);
       return;
     }
 
@@ -49,6 +51,7 @@ export default function Cart({ cart, setCart }) {
       order_id: data.id,
       handler: function (response) {
         setCart([]);
+        setIsLoading(false);
       },
       theme: {
         color: "#ff8800",

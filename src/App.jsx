@@ -10,9 +10,11 @@ import Products from "./components/Products";
 import ProductPage from "./components/ProductPage";
 import Cart from "./components/Cart";
 import Footer from "./components/utils/Footer";
+import Loader from "./components/utils/Loader";
 
 export default function App() {
   const [showCart, setShowCart] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -44,6 +46,7 @@ export default function App() {
 
   return (
     <Router>
+      {isLoading ? <Loader /> : ""}
       <Navbar cart={cart} setShowCart={setShowCart} />
       <div className="body-controller">
         <div className={`main-body-container ${showCart ? "shrinked" : ""}`}>
@@ -57,7 +60,11 @@ export default function App() {
           </Routes>
         </div>
         <div className={`cart-container ${showCart ? "visible" : ""}`}>
-          {showCart ? <Cart cart={cart} setCart={setCart} /> : ""}
+          {showCart ? (
+            <Cart cart={cart} setCart={setCart} setIsLoading={setIsLoading} />
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <Footer />
