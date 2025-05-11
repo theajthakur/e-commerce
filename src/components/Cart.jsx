@@ -2,11 +2,63 @@ import { LucideShoppingCart, X } from "lucide-react";
 import React from "react";
 
 export default function Cart({ cart, setCart }) {
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
   const bill = { offeredPrice: 0, originalPrice: 0 };
   cart.forEach((c) => {
     bill.offeredPrice += c.offeredPrice;
     bill.originalPrice += c.originalPrice;
   });
+  const loadRazorpay = async (amount) => {
+    const resh = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!resh) {
+      alert("Failed to load Razorpay SDK. Are you online?");
+      return;
+    }
+
+    const res = await fetch(
+      "https://treshop-backend-0n7w.onrender.com/payment/create-order",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ amount }),
+      }
+    );
+
+    const data = await res.json();
+
+    const options = {
+      key: "rzp_test_i31RvOR7u7cW3M",
+      amount: data.amount,
+      currency: data.currency,
+      name: "Treshop",
+      description: "Thanks for your purchase from Treshop!",
+      order_id: data.id,
+      handler: function (response) {
+        setCart([]);
+      },
+      theme: {
+        color: "#ff8800",
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
   return (
     <div className="cart-items-container h-100">
       <div className="container h-100">
@@ -66,7 +118,12 @@ export default function Cart({ cart, setCart }) {
                   </tr>
                 </tbody>
               </table>
-              <button className="w-100 btn btn-lg btn-warning">
+              <button
+                className="w-100 btn btn-lg btn-warning"
+                onClick={() => {
+                  loadRazorpay(bill.offeredPrice);
+                }}
+              >
                 Purchase Now
               </button>
             </div>
