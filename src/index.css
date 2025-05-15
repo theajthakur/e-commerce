@@ -18,3 +18,23 @@ body {
 .poppins {
   font-family: "Poppins", cursive;
 }
+
+@keyframes ltr {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes utd {
+  0% {
+    height: 0%;
+  }
+
+  100% {
+    height: 100%;
+  }
+}

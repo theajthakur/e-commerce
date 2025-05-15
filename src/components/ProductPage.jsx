@@ -15,7 +15,7 @@ export default function ProductPage({ setCart, cart, setIsLoading }) {
     loadRazorpay(product.offeredPrice, setIsLoading);
   };
   return (
-    <div className="product-showcase-container container">
+    <div className="product-showcase-container px-2 px-lg-5 container">
       <div className="main-show">
         {product ? (
           <div className="row">
@@ -64,7 +64,11 @@ export default function ProductPage({ setCart, cart, setIsLoading }) {
                       ) : (
                         <button
                           onClick={() => {
-                            setCart((prev) => [...prev, product]);
+                            setCart((prev) => {
+                              const quantProduct = { ...product };
+                              quantProduct.quantity = 1;
+                              return [...prev, quantProduct];
+                            });
                           }}
                         >
                           <ShoppingCart /> <span>Add to Cart</span>

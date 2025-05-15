@@ -1,12 +1,16 @@
 import { LucideShoppingCart, X } from "lucide-react";
-import React from "react";
+import "../style/Cart.css";
 import { loadRazorpay } from "../utils/Razorpay";
+import { useNavigate } from "react-router";
+import CartQuantity from "./utils/CartQuantity";
 
 export default function Cart({ cart, setCart, setIsLoading }) {
+  const navigate = useNavigate();
   const bill = { offeredPrice: 0, originalPrice: 0 };
   cart.forEach((c) => {
-    bill.offeredPrice += c.offeredPrice;
-    bill.originalPrice += c.originalPrice;
+    console.log(c);
+    bill.offeredPrice += c.offeredPrice * c.quantity;
+    bill.originalPrice += c.originalPrice * c.quantity;
   });
 
   return (
@@ -26,22 +30,25 @@ export default function Cart({ cart, setCart, setIsLoading }) {
                     />
                   </div>
                   <div className="detail-product w-100">
-                    <h6 className="m-0">{c.name}</h6>
+                    <h6
+                      className="m-0"
+                      onClick={() => {
+                        navigate(`/product/${c.uniqueID}`);
+                      }}
+                    >
+                      {c.name}
+                    </h6>
                     <p className="small m-0">
                       <span className="small">{c.description}</span>
                     </p>
                     <p>{c.offeredPrice}</p>
                   </div>
-                  <div className="action-product">
-                    <button
-                      onClick={() => {
-                        setCart((prev) =>
-                          prev.filter((p) => p.uniqueID != c.uniqueID)
-                        );
-                      }}
-                    >
-                      <X size={15} />
-                    </button>
+                  <div className="cart-quantity">
+                    <CartQuantity
+                      cart={cart}
+                      setCart={setCart}
+                      id={c.uniqueID}
+                    />
                   </div>
                 </div>
               </div>

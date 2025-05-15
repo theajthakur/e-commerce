@@ -1,0 +1,19 @@
+.inner {
+  display: inline-flex;
+}
+
+.inner .inln span {
+  display: flex;
+  width: 30px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0;
+  border: 0;
+  height: 100%;
+}
+
+.inner .inln.quantity-btn {
+  background: #80808029;
+  cursor: pointer;
+  padding: 2px;
+}

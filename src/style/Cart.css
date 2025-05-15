@@ -1,0 +1,12 @@
+.detail-product h6 {
+  cursor: pointer;
+  color: rgb(0, 102, 255);
+  transition: 0.2s;
+  font-weight: 500;
+}
+
+.detail-product h6:hover {
+  cursor: pointer;
+  color: rgb(0, 68, 255);
+  transition: 0.2s;
+}

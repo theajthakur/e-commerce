@@ -51,3 +51,7 @@ input.search-form-input {
 input.search-form-input:focus {
   color: white;
 }
+
+.animation_ltr {
+  animation: 1s ltr;
+}

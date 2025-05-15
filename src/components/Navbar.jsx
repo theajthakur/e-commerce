@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Cart from "../assets/Cart";
 import "../style/Navbar.css";
-import { CrossIcon, Search, X } from "lucide-react";
-import { useNavigate } from "react-router";
+import { CrossIcon, Search, User, User2, X } from "lucide-react";
+import { Link, useNavigate } from "react-router";
 
 function Navbar({ cart, setShowCart }) {
   const [searchVisibility, setSearchVisibility] = useState(false);
@@ -33,7 +33,7 @@ function Navbar({ cart, setShowCart }) {
       component: searchVisibility ? (
         <input
           autoFocus={true}
-          className="search-form-input"
+          className="search-form-input animation_ltr"
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
@@ -70,6 +70,10 @@ function Navbar({ cart, setShowCart }) {
       title: "Search Products",
     },
     {
+      component: <User2 color="white" />,
+      title: "Your Account",
+    },
+    {
       component: <Cart cartLength={cart.length} setShowCart={setShowCart} />,
       title: "Cart Items",
     },
@@ -77,12 +81,13 @@ function Navbar({ cart, setShowCart }) {
   return (
     <nav className="navbar navbar-expand navbar-dark bg-dark">
       <div className="container">
-        <a className="navbar-brand" href="/">
-          <div className="logo-animate">
+        <div className="logo-animate">
+          <Link to={"/"}>
             <img src="/assets/images/logo.svg" />
             <span>Treshop</span>
-          </div>
-        </a>
+          </Link>
+        </div>
+
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto align-items-center navoption-container">
             {navOptions.map((nv, index) => (

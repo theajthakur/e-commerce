@@ -9,8 +9,8 @@ export default function Cart({ cartLength, setShowCart }) {
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="60"
-        height="60"
+        width="50"
+        height="50"
         viewBox="0 0 64 64"
         fill="none"
       >
@@ -23,18 +23,24 @@ export default function Cart({ cartLength, setShowCart }) {
         />
         <circle cx="26" cy="52" r="3" fill="#ccc" />
         <circle cx="44" cy="52" r="3" fill="#ccc" />
-        <circle cx="48" cy="12" r="10" fill="#EF4444" />
-        <text
-          x="48"
-          y="16"
-          textAnchor="middle"
-          fontSize="12"
-          fontFamily="Arial, sans-serif"
-          fill="white"
-          fontWeight="bold"
-        >
-          {cartLength}
-        </text>
+        {cartLength > 0 ? (
+          <>
+            <circle cx="48" cy="12" r="10" fill="#EF4444" />
+            <text
+              x="48"
+              y="16"
+              textAnchor="middle"
+              fontSize="12"
+              fontFamily="Arial, sans-serif"
+              fill="white"
+              fontWeight="bold"
+            >
+              {cartLength}
+            </text>
+          </>
+        ) : (
+          ""
+        )}
       </svg>
     </div>
   );
