@@ -70,7 +70,35 @@ function Navbar({ cart, setShowCart }) {
       title: "Search Products",
     },
     {
-      component: <User2 color="white" />,
+      component: (
+        <div className="dropdown">
+          <button
+            className="dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <User2 color="white" />
+          </button>
+
+          <ul
+            className="dropdown-menu dropdown-menu-end"
+            aria-labelledby="dropdownMenuButton"
+          >
+            <li>
+              <a className="dropdown-item" href="#">
+                Orders
+              </a>
+            </li>
+            <li>
+              <a className="dropdown-item" href="#">
+                Settings
+              </a>
+            </li>
+          </ul>
+        </div>
+      ),
       title: "Your Account",
     },
     {

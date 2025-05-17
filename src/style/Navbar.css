@@ -55,3 +55,9 @@ input.search-form-input:focus {
 .animation_ltr {
   animation: 1s ltr;
 }
+
+button#dropdownMenuButton {
+  background: transparent;
+  border: 0;
+  color: white;
+}
