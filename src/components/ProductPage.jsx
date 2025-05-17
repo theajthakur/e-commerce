@@ -61,6 +61,7 @@ export default function ProductPage({
                     </h5>
                   </div>
                   {!userAddress ||
+                  !userAddress.name ||
                   !userAddress.locality ||
                   !userAddress.city ||
                   !userAddress.pin ? (

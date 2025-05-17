@@ -1,10 +1,10 @@
 import { LucideShoppingCart, X } from "lucide-react";
 import "../style/Cart.css";
 import { loadRazorpay } from "../utils/Razorpay";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import CartQuantity from "./utils/CartQuantity";
 
-export default function Cart({ cart, setCart, setIsLoading }) {
+export default function Cart({ cart, setCart, setIsLoading, userAddress }) {
   const navigate = useNavigate();
   const bill = { offeredPrice: 0, originalPrice: 0 };
   cart.forEach((c) => {
@@ -62,7 +62,7 @@ export default function Cart({ cart, setCart, setIsLoading }) {
                   </tr>
                   <tr>
                     <td>Discount: </td>
-                    <td>
+                    <td className="text-danger">
                       {(bill?.originalPrice - bill?.offeredPrice)?.toFixed(2) ||
                         0.0}
                     </td>
@@ -75,14 +75,30 @@ export default function Cart({ cart, setCart, setIsLoading }) {
                   </tr>
                 </tbody>
               </table>
-              <button
-                className="w-100 btn btn-lg btn-warning"
-                onClick={() => {
-                  loadRazorpay(bill.offeredPrice, setIsLoading, setCart);
-                }}
-              >
-                Purchase Now
-              </button>
+              {!userAddress ||
+              !userAddress.name ||
+              !userAddress.locality ||
+              !userAddress.city ||
+              !userAddress.pin ? (
+                <div className="address-error mt-3">
+                  <p className="alert alert-info">
+                    Please{" "}
+                    <Link to={"/settings/address"} className="text-primary">
+                      Complete Your Address
+                    </Link>{" "}
+                    first before placing an order!
+                  </p>
+                </div>
+              ) : (
+                <button
+                  className="w-100 btn btn-lg btn-warning"
+                  onClick={() => {
+                    loadRazorpay(bill.offeredPrice, setIsLoading, setCart);
+                  }}
+                >
+                  Purchase Now
+                </button>
+              )}
             </div>
           </div>
         ) : (

@@ -97,7 +97,12 @@ export default function App() {
         </div>
         <div className={`cart-container ${showCart ? "visible" : ""}`}>
           {showCart ? (
-            <Cart cart={cart} setCart={setCart} setIsLoading={setIsLoading} />
+            <Cart
+              cart={cart}
+              setCart={setCart}
+              setIsLoading={setIsLoading}
+              userAddress={userAddress}
+            />
           ) : (
             ""
           )}
