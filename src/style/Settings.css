@@ -1,0 +1,29 @@
+.settings-container .setting-refers .link-container {
+  margin-bottom: 2px;
+  box-shadow: 0 0 10px 0 #00000005;
+  transition: all 0.2s;
+  cursor: pointer;
+  color: #626262;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+.settings-container .setting-refers .link-container:hover {
+  box-shadow: 0 0 10px 0 #00000000;
+}
+
+.settings-container .setting-refers .link-container .link-text p {
+  margin: 0;
+}
+
+.settings-container .setting-refers .link-container .link-icon {
+  padding: 5px;
+  transition: 0.2s;
+}
+
+.settings-container .setting-refers .link-container:hover .link-icon {
+  background: #f80;
+  color: white;
+}

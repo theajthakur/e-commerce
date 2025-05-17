@@ -11,6 +11,7 @@ import ProductPage from "./components/ProductPage";
 import Cart from "./components/Cart";
 import Footer from "./components/utils/Footer";
 import Loader from "./components/utils/Loader";
+import Settings from "./components/Settings";
 
 export default function App() {
   const [showCart, setShowCart] = useState(false);
@@ -63,6 +64,7 @@ export default function App() {
                 />
               }
             />
+            <Route path="/settings/*" element={<Settings />} />
           </Routes>
         </div>
         <div className={`cart-container ${showCart ? "visible" : ""}`}>

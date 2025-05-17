@@ -87,14 +87,14 @@ function Navbar({ cart, setShowCart }) {
             aria-labelledby="dropdownMenuButton"
           >
             <li>
-              <a className="dropdown-item" href="#">
+              <Link className="dropdown-item" to="/orders">
                 Orders
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="dropdown-item" href="#">
+              <Link className="dropdown-item" to={"/settings"}>
                 Settings
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
