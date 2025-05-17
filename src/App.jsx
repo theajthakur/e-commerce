@@ -77,6 +77,7 @@ export default function App() {
               path="/product/:productId"
               element={
                 <ProductPage
+                  userAddress={userAddress}
                   cart={cart}
                   setCart={setCart}
                   setIsLoading={setIsLoading}

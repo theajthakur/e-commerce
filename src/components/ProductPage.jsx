@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "../style/ProductPage.css";
 import products from "../assets/Products.json";
-import { useParams } from "react-router";
-import { CheckCheck, ShoppingBag, ShoppingCart, Star } from "lucide-react";
+import { Link, useParams } from "react-router";
+import {
+  CheckCheck,
+  Locate,
+  ShoppingBag,
+  ShoppingCart,
+  Star,
+} from "lucide-react";
 import { loadRazorpay } from "../utils/Razorpay";
-export default function ProductPage({ setCart, cart, setIsLoading }) {
+export default function ProductPage({
+  setCart,
+  cart,
+  setIsLoading,
+  userAddress,
+}) {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   useEffect(() => {
@@ -49,33 +60,70 @@ export default function ProductPage({ setCart, cart, setIsLoading }) {
                       <s>₹ {product.originalPrice}</s>
                     </h5>
                   </div>
-                  <div className="shop-btn-container">
-                    <div className="inner-btn buy-btn">
-                      <button onClick={handleQuickPurchase}>
-                        <ShoppingBag /> <span>Buy Now</span>
-                      </button>
+                  {!userAddress ||
+                  !userAddress.locality ||
+                  !userAddress.city ||
+                  !userAddress.pin ? (
+                    <div className="address-error mt-3">
+                      <p className="alert alert-info">
+                        Please{" "}
+                        <Link to={"/settings/address"} className="text-primary">
+                          Complete Your Address
+                        </Link>{" "}
+                        first before placing an order!
+                      </p>
                     </div>
-                    <div className="inner-btn cart-btn">
-                      {cart.find((c) => c.uniqueID === product.uniqueID) ? (
-                        <button disabled>
-                          {" "}
-                          <CheckCheck /> <span>Added to Cart</span>
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => {
-                            setCart((prev) => {
-                              const quantProduct = { ...product };
-                              quantProduct.quantity = 1;
-                              return [...prev, quantProduct];
-                            });
-                          }}
-                        >
-                          <ShoppingCart /> <span>Add to Cart</span>
-                        </button>
-                      )}
-                    </div>
-                  </div>
+                  ) : (
+                    <>
+                      <div className="address-container my-3">
+                        <div className="d-flex align-items-center gap-2">
+                          <div className="address-icon">
+                            <Locate />
+                          </div>
+                          <div className="address-value">
+                            {!userAddress ||
+                            !userAddress.locality ||
+                            !userAddress.city ||
+                            !userAddress.pin ? (
+                              <></>
+                            ) : (
+                              <p className="m-0">
+                                {userAddress.locality}, {userAddress.city},{" "}
+                                {userAddress.pin}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="shop-btn-container">
+                        <div className="inner-btn buy-btn">
+                          <button onClick={handleQuickPurchase}>
+                            <ShoppingBag /> <span>Buy Now</span>
+                          </button>
+                        </div>
+                        <div className="inner-btn cart-btn">
+                          {cart.find((c) => c.uniqueID === product.uniqueID) ? (
+                            <button disabled>
+                              {" "}
+                              <CheckCheck /> <span>Added to Cart</span>
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => {
+                                setCart((prev) => {
+                                  const quantProduct = { ...product };
+                                  quantProduct.quantity = 1;
+                                  return [...prev, quantProduct];
+                                });
+                              }}
+                            >
+                              <ShoppingCart /> <span>Add to Cart</span>
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
