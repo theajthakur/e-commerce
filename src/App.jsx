@@ -17,6 +17,7 @@ export default function App() {
   const [showCart, setShowCart] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [cart, setCart] = useState([]);
+  const [userAddress, setUserAddress] = useState({});
 
   useEffect(() => {
     try {
@@ -24,19 +25,37 @@ export default function App() {
       setCart(JSON.parse(cartItems));
     } catch (error) {
       localStorage.setItem("treshop_cart", "[]");
-      console.error("Something went wrong!");
+      console.error("Setting Cart Failed!");
+    }
+
+    try {
+      const addressFetch = localStorage.getItem("treshop_address") || "{}";
+      setUserAddress(JSON.parse(addressFetch));
+      console.log(addressFetch);
+    } catch (error) {
+      localStorage.setItem("treshop_address", "{}");
+      console.error("Setting Address failed!");
     }
   }, []);
 
-  const isFirstRender = useRef(true);
+  const isFirstRenderCart = useRef(true);
+  const isFirstRenderAddress = useRef(true);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
+    if (isFirstRenderCart.current) {
+      isFirstRenderCart.current = false;
       return;
     }
     localStorage.setItem("treshop_cart", JSON.stringify(cart));
   }, [cart]);
+
+  useEffect(() => {
+    if (isFirstRenderAddress.current) {
+      isFirstRenderAddress.current = false;
+      return;
+    }
+    localStorage.setItem("treshop_address", JSON.stringify(userAddress));
+  }, [userAddress]);
 
   const HomePage = () => (
     <>
@@ -64,7 +83,15 @@ export default function App() {
                 />
               }
             />
-            <Route path="/settings/*" element={<Settings />} />
+            <Route
+              path="/settings/*"
+              element={
+                <Settings
+                  userAddress={userAddress}
+                  setUserAddress={setUserAddress}
+                />
+              }
+            />
           </Routes>
         </div>
         <div className={`cart-container ${showCart ? "visible" : ""}`}>

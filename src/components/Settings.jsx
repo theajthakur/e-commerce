@@ -2,8 +2,9 @@ import { Routes, Route, Link } from "react-router";
 import Address from "./settings/Address";
 import "../style/Settings.css";
 import { Laptop, LocateIcon } from "lucide-react";
+import Support from "./settings/Support";
 
-export default function Settings() {
+export default function Settings({ userAddress, setUserAddress }) {
   const links = [
     { text: "Address", path: "address", icon: <LocateIcon /> },
     { text: "Support", path: "support", icon: <Laptop /> },
@@ -33,7 +34,16 @@ export default function Settings() {
           </div>
           <div className="settings-content col-sm-9 col-lg-8">
             <Routes>
-              <Route path="address" element={<Address />} />
+              <Route
+                path="address"
+                element={
+                  <Address
+                    userAddress={userAddress}
+                    setUserAddress={setUserAddress}
+                  />
+                }
+              />
+              <Route path="support" element={<Support />} />
             </Routes>
           </div>
         </div>
