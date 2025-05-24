@@ -12,12 +12,14 @@ import Cart from "./components/Cart";
 import Footer from "./components/utils/Footer";
 import Loader from "./components/utils/Loader";
 import Settings from "./components/Settings";
+import Login from "./components/Login";
 
 export default function App() {
   const [showCart, setShowCart] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [cart, setCart] = useState([]);
   const [userAddress, setUserAddress] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     try {
@@ -35,6 +37,18 @@ export default function App() {
     } catch (error) {
       localStorage.setItem("treshop_address", "{}");
       console.error("Setting Address failed!");
+    }
+
+    try {
+      const loginStatus =
+        localStorage.getItem("treshop_login_status") || "false";
+      if (loginStatus === "true") {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }, []);
 
@@ -67,48 +81,56 @@ export default function App() {
   return (
     <Router>
       {isLoading ? <Loader /> : ""}
-      <Navbar cart={cart} setShowCart={setShowCart} />
-      <div className="body-controller">
-        <div className={`main-body-container ${showCart ? "shrinked" : ""}`}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/search/:product" element={<Products />} />
-            <Route
-              path="/product/:productId"
-              element={
-                <ProductPage
-                  userAddress={userAddress}
+      {isLoggedIn ? (
+        <>
+          <Navbar cart={cart} setShowCart={setShowCart} />
+          <div className="body-controller">
+            <div
+              className={`main-body-container ${showCart ? "shrinked" : ""}`}
+            >
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/search/:product" element={<Products />} />
+                <Route
+                  path="/product/:productId"
+                  element={
+                    <ProductPage
+                      userAddress={userAddress}
+                      cart={cart}
+                      setCart={setCart}
+                      setIsLoading={setIsLoading}
+                    />
+                  }
+                />
+                <Route
+                  path="/settings/*"
+                  element={
+                    <Settings
+                      userAddress={userAddress}
+                      setUserAddress={setUserAddress}
+                    />
+                  }
+                />
+              </Routes>
+            </div>
+            <div className={`cart-container ${showCart ? "visible" : ""}`}>
+              {showCart ? (
+                <Cart
                   cart={cart}
                   setCart={setCart}
                   setIsLoading={setIsLoading}
-                />
-              }
-            />
-            <Route
-              path="/settings/*"
-              element={
-                <Settings
                   userAddress={userAddress}
-                  setUserAddress={setUserAddress}
                 />
-              }
-            />
-          </Routes>
-        </div>
-        <div className={`cart-container ${showCart ? "visible" : ""}`}>
-          {showCart ? (
-            <Cart
-              cart={cart}
-              setCart={setCart}
-              setIsLoading={setIsLoading}
-              userAddress={userAddress}
-            />
-          ) : (
-            ""
-          )}
-        </div>
-      </div>
-      <Footer />
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
+          <Footer />
+        </>
+      ) : (
+        <Login setIsLoggedIn={setIsLoggedIn} />
+      )}
     </Router>
   );
 }
