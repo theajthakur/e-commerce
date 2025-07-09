@@ -19,7 +19,7 @@ export const loadRazorpay = async (amount, setIsLoading, setCart = null) => {
   }
 
   const res = await fetch(
-    "https://treshop-backend-0n7w.onrender.com/payment/create-order",
+    "https://treshop-backend-va8a.onrender.com/payment/create-order",
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
